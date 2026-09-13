@@ -1,0 +1,130 @@
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700;800&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: #0a0618;
+  --bg-deep: #0e0a24;
+  --surface: rgba(255, 255, 255, 0.06);
+  --surface-strong: rgba(255, 255, 255, 0.1);
+  --border: rgba(255, 255, 255, 0.12);
+  --text: #f4f2ff;
+  --text-muted: #b8b3d1;
+  --accent: #a78bfa;
+}
+
+html.light {
+  --bg: #f4f2ff;
+  --bg-deep: #eae6ff;
+  --surface: rgba(20, 10, 50, 0.04);
+  --surface-strong: rgba(20, 10, 50, 0.07);
+  --border: rgba(20, 10, 50, 0.1);
+  --text: #191333;
+  --text-muted: #5c5580;
+  --accent: #7c3aed;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: "IBM Plex Sans Arabic", "Inter", system-ui, sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+html[dir="rtl"] body {
+  font-family: "IBM Plex Sans Arabic", system-ui, sans-serif;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--surface-strong);
+  border-radius: 999px;
+}
+
+@layer components {
+  .glass {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+  }
+
+  .glass-card {
+    @apply glass rounded-2xl shadow-xl;
+  }
+
+  .glass-strong {
+    background: var(--surface-strong);
+    border: 1px solid var(--border);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+  }
+
+  .text-muted {
+    color: var(--text-muted);
+  }
+
+  .nebula-page {
+    min-height: 100%;
+    background-color: var(--bg);
+    background-image: var(--nebula-bg, none);
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl px-5 py-2.5 font-medium text-white
+      bg-gradient-to-r from-nebula-purple via-nebula-violet to-nebula-cyan
+      shadow-glow transition-transform duration-200 hover:scale-[1.03] active:scale-[0.98]
+      disabled:opacity-50 disabled:pointer-events-none;
+  }
+
+  .btn-secondary {
+    @apply glass inline-flex items-center justify-center gap-2 rounded-xl px-5 py-2.5 font-medium
+      transition-all duration-200 hover:bg-white/10 active:scale-[0.98];
+    color: var(--text);
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2 font-medium
+      transition-colors duration-200 hover:bg-white/5;
+    color: var(--text-muted);
+  }
+
+  .input-glass {
+    @apply glass w-full rounded-xl px-4 py-2.5 outline-none transition-all duration-200 placeholder:text-muted;
+    color: var(--text);
+  }
+  .input-glass:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.2);
+  }
+
+  .badge {
+    @apply inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-xs font-medium glass;
+  }
+}
+
+.nebula-blob {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(80px);
+  opacity: 0.5;
+  pointer-events: none;
+}
